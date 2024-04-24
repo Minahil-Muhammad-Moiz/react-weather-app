@@ -9,7 +9,7 @@ function App() {
   const [inputVal, setInputVal] = useState("");
   const [place, setPlace] = useState("");
 
-  const { data, refetch } = useQuery({
+  const { data, refetch, isError, isLoading } = useQuery({
     queryKey: ["weather"],
     queryFn: async () => {
       if (place) {
@@ -45,9 +45,9 @@ function App() {
             onClick={search}
             className={classNames(" hover:text-orange-400", searchIcon)}
           />
-          {/* {isLoading && <p>Loading...</p>}
-          {isError && <div><p>Error 404, City not found!</p></div>} */}
-          {data && <WeatherDisplay data={data} />}
+          {isLoading && <p className={classNames(pTAg)}>Loading...</p>}
+          {isError && <div><p className={classNames(pTAg)}>Error 404, City not found!</p></div>}
+          {!isLoading && !isError && place && <WeatherDisplay data={data} />}
         </div>
       </div>
     </>
@@ -59,3 +59,4 @@ export default App;
 const parentDiv =
   "p-5 w-[600px] h-[500px] backdrop-blur-3xl absolute top-0 left-0 right-0 bottom-0 m-auto rounded-lg";
 const searchIcon = "absolute right-4 h-8 w-8 top-4 transition-all ";
+const pTAg = 'text-white text-center mx-auto mt-16 text-xl font-bold'
