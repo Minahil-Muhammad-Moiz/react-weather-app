@@ -9,7 +9,7 @@ function App() {
   const [inputVal, setInputVal] = useState("");
   const [place, setPlace] = useState("");
 
-  const { data, refetch, isError, isLoading } = useQuery({
+  const { data, refetch, isLoading, isError } = useQuery({
     queryKey: ["weather"],
     queryFn: async () => {
       if (place) {
@@ -18,11 +18,19 @@ function App() {
         ).then((res) => res.data);
       }
     },
+    enabled: false
   });
 
   useEffect(() => {
     refetch();
   }, [place]);
+
+  const handleChange = (e)=>{
+    setInputVal(e.target.value);
+    setPlace('');
+    isError(false),
+    isLoading(false)
+  }
 
   const search = () => {
     setPlace(inputVal);
@@ -34,7 +42,7 @@ function App() {
         <div className="relative ">
           <input
             value={inputVal}
-            onChange={(e) => setInputVal(e.target.value)}
+            onChange={(e) => handleChange(e) }
             onKeyDown={(e) => {
               e.key === "Enter" && search();
             }}
@@ -45,8 +53,8 @@ function App() {
             onClick={search}
             className={classNames(" hover:text-orange-400", searchIcon)}
           />
-          {isLoading && <p className={classNames(pTAg)}>Loading...</p>}
-          {isError && <div><p className={classNames(pTAg)}>Error 404, City not found!</p></div>}
+          {place && isLoading && <p className={classNames(pTAg)}>Loading...</p>}
+          {place && !isLoading && isError && <div><p className={classNames(pTAg)}>Error 404, City not found!</p></div>}
           {!isLoading && !isError && place && <WeatherDisplay data={data} />}
         </div>
       </div>
