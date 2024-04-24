@@ -1,29 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import Axios from "axios";
 import classNames from "classnames";
-import React, { useEffect } from "react";
+import React from "react";
 import { BsThermometer } from "react-icons/bs";
 import { FaLocationPin } from "react-icons/fa6";
 import { WiHumidity, WiWindBeaufort0 } from "react-icons/wi";
 
 const WeatherDisplay = (props) => {
-  const { data, refetch } = useQuery({
-    queryKey: ["weather"],
-    queryFn: async () => {
-      if (props.place) {
-        const response = await Axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${props.place}&units=metric&appid=dd94f859a0e52d6e4767fddf735f04a7`
-        );
-        return response.data;
-      }
-    },
-    enabled: false,
-  });
-
-  useEffect(() => {
-    refetch();
-  }, [props.place]);
-
+  const data = props.data
   return (
     <div className={classNames(weatherDiv)}>
       <div className={classNames(bodyDiv)}>
@@ -40,7 +22,7 @@ const WeatherDisplay = (props) => {
         <div className={classNames(locationDiv)}>
           <FaLocationPin />
           <p className={classNames("ml-2")}>
-            {props.place}, {data?.sys.country}
+            {data?.name}, {data?.sys.country}
           </p>
         </div>
       </div>
@@ -79,7 +61,7 @@ const bodyDiv =
 const locationDiv =
   "flex items-center justify-center pt-4 font-light text-md text-gray-300";
 const footerDiv =
-  "bottom-0 flex justify-evenly items-center text-white w-[90%] border";
+  "bottom-0 flex justify-evenly items-center text-white w-[90%] ";
 
 const bottomDivs =
   " w-[30%] m-4 p-4 flex justify-center items-center flex-col ";
