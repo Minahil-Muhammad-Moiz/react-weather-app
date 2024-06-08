@@ -46,7 +46,7 @@ const WeatherDisplay = (props) => {
             <WiWindBeaufort0 className={classNames(Icon)} />
             <p>{data?.wind.speed} m/s</p>
           </div>
-          <p className={classNames(FtFont)}>Wind Speed</p>
+          <p className={classNames('',FtFont)}>Wind Speed</p>
         </div>
       </div>
     </div>
@@ -55,16 +55,15 @@ const WeatherDisplay = (props) => {
 
 export default WeatherDisplay;
 
-const weatherDiv = "w-full flex flex-col items-center justify-center";
+const weatherDiv = "w-full flex flex-col items-center justify-center ";
 const bodyDiv =
-  "m-4 p-4 border-t border-b text-white flex flex-col justify-center items-center w-[90%] ";
+  "m-4 pt-5 pb-6 md:p-4 border-t border-b text-white flex flex-col justify-center items-center w-[95%] ";
 const locationDiv =
-  "flex items-center justify-center pt-4 font-light text-md text-gray-300";
+  "flex items-center justify-center pt-4 font-light text-md text-gray-300"
 const footerDiv =
-  "bottom-0 flex justify-evenly items-center text-white w-[90%] ";
-
+  "md:bottom-0 flex justify-evenly items-center text-white w-full ";
 const bottomDivs =
-  " w-[30%] m-4 p-4 flex justify-center items-center flex-col ";
-const subBottomDivs = "flex items-center mb-2 text-lg ";
-const Icon = "size-6 mr-2";
+  " w-[30%] md:m-2 p-2 md:p-4 flex justify-center items-center flex-col ";
+const subBottomDivs = "flex flex-col md:flex-row justify-center items-center mb-2 text-md md:text-lg w-full";
+const Icon = "size-6 md:mr-2 ";
 const FtFont = "text-gray-300 font-light";
