@@ -38,8 +38,8 @@ function App() {
   };
   return (
     <>
-      <div className={classNames('border ',parentDiv)}>
-        <div className="relative ">
+      <div className={classNames('border backdrop-blur-3xl ',parentDiv)}>
+        <div className="relative">
           <input
             value={inputVal}
             onChange={(e) => handleChange(e) }
